@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS modular_db;
+CREATE DATABASE modular_db;
