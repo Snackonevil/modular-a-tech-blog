@@ -6,7 +6,7 @@ const routes = require("./controllers");
 // helpers
 require("dotenv").config();
 
-// const sequelize = require("./config/connection");
+const sequelize = require("./config/connection");
 // sequelize store?
 
 const app = express();
@@ -23,6 +23,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(routes);
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}...`));
-// sequelize.sync({ force: false }).then(() => {
-// });
+sequelize.sync({ force: false }).then(() => {
+    app.listen(PORT, () => console.log(`Server started on port ${PORT}...`));
+});
