@@ -1,1 +1,61 @@
-<h1 class="card">THIS WILL BE A FORM TO GATHER NEW USER INFORMATION</h1>
+<div class="container login-card">
+    <h2
+        style="font-family:'Courier New', Courier, monospace; margin-bottom: 40px"
+    >Create an account</h2>
+    <form class="signup-form">
+        <div class="mb-3">
+            <label for="newUserFirstName" class="form-label">First Name</label>
+            <input
+                type="text"
+                class="form-control"
+                id="newUserFirstName"
+                required
+            />
+        </div>
+        <div class="mb-3">
+            <label for="newUserLastName" class="form-label">Last Name</label>
+            <input
+                type="text"
+                class="form-control"
+                id="newUserLastName"
+                required
+            />
+        </div>
+        <div class="mb-3">
+            <label for="newUserUserName" class="form-label">Username</label>
+            <input
+                type="text"
+                class="form-control"
+                id="newUserUserName"
+                required
+            />
+        </div>
+        {{! <div class="mb-3">
+            <label for="newUserEmail" class="form-label">Email address</label>
+            <input
+                type="email"
+                class="form-control"
+                id="newUserEmail"
+                aria-describedby="emailHelp"
+                required
+            />
+        </div> }}
+        <div class="mb-3">
+            <label for="newUserPassword" class="form-label">Password</label>
+            <input
+                type="password"
+                class="form-control"
+                id="newUserPassword"
+                required
+            />
+        </div>
+
+        <button
+            type="submit"
+            class="btn btn-purple"
+            style="margin-top: 20px"
+        >Create Account</button>
+    </form>
+</div>
+
+<script src="./js/createUser.js"></script>
