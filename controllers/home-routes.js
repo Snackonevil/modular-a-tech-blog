@@ -4,14 +4,23 @@ const router = require("express").Router();
 
 router.get("/", (req, res) => {
     if (req.session.loggedIn) {
-        res.render("home");
+        res.render("home", {
+            loggedIn: req.session.loggedIn,
+        });
         return;
     } else {
         res.redirect("/login");
     }
 });
 router.get("/dashboard", (req, res) => {
-    res.render("dashboard");
+    if (req.session.loggedIn) {
+        res.render("dashboard", {
+            loggedIn: req.session.loggedIn,
+        });
+        return;
+    } else {
+        res.redirect("/login");
+    }
 });
 
 router.get("/login", (req, res) => {

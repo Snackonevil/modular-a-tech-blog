@@ -67,4 +67,17 @@ router.post("/login", async (req, res) => {
     }
 });
 
+// Logout DESTROYYYY
+router.post("/logout", (req, res) => {
+    console.log("test");
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+        console.log("DESTROYED");
+    } else {
+        res.status(404).end();
+    }
+});
+
 module.exports = router;
