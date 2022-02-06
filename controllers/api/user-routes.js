@@ -37,7 +37,7 @@ router.post("/login", async (req, res) => {
 
         if (!dbUserData) {
             res.status(400).json({
-                message: "Incorrect email",
+                message: "Account not found",
             });
             return;
         }
@@ -46,7 +46,7 @@ router.post("/login", async (req, res) => {
 
         if (!validPassword) {
             res.status(400).json({
-                message: "Incorrect password",
+                message: "Account not found",
             });
             return;
         }
@@ -54,12 +54,12 @@ router.post("/login", async (req, res) => {
         // Once the user successfully logs in, set up the sessions variable 'loggedIn'
         req.session.save(() => {
             req.session.loggedIn = true;
+            req.session.userData = dbUserData;
 
             res.status(200).json({
                 user: dbUserData,
                 message: "You are now logged in!",
             });
-            console.log("logged on");
         });
     } catch (err) {
         console.log(err);

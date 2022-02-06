@@ -6,6 +6,7 @@ router.get("/", (req, res) => {
     if (req.session.loggedIn) {
         res.render("home", {
             loggedIn: req.session.loggedIn,
+            userData: req.session.userData,
         });
         return;
     } else {
@@ -16,6 +17,7 @@ router.get("/dashboard", (req, res) => {
     if (req.session.loggedIn) {
         res.render("dashboard", {
             loggedIn: req.session.loggedIn,
+            userData: req.session.userData,
         });
         return;
     } else {

@@ -13,6 +13,8 @@ const handleLogin = async e => {
         if (response.ok) {
             document.location.replace("/");
         }
+        // const data = await response.json();
+        // console.log(data);
     }
 };
 
