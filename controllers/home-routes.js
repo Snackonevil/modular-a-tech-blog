@@ -5,6 +5,7 @@ const router = require("express").Router();
 router.get("/", (req, res) => {
     if (req.session.loggedIn) {
         res.render("home");
+        return;
     } else {
         res.redirect("/login");
     }

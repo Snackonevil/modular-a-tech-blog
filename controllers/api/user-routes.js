@@ -12,8 +12,6 @@ router.get("/:id", async (req, res) => {
 
 // Create User
 router.post("/", async (req, res) => {
-    console.log(req.body);
-
     try {
         const newUser = await User.create({
             first_name: req.body.firstName,
@@ -24,7 +22,7 @@ router.post("/", async (req, res) => {
         });
         res.status(200).json(newUser);
     } catch (err) {
-        res.status(500).json(err.message);
+        res.status(500).json(err);
     }
 });
 
@@ -61,6 +59,7 @@ router.post("/login", async (req, res) => {
                 user: dbUserData,
                 message: "You are now logged in!",
             });
+            console.log("logged on");
         });
     } catch (err) {
         console.log(err);

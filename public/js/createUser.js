@@ -13,12 +13,12 @@ const createUser = async e => {
         password,
     };
 
-    const newUser = await fetch("./api/users", {
+    const response = await fetch("./api/users", {
         method: "POST",
         body: JSON.stringify(reqBody),
         headers: { "Content-Type": "application/json" },
     });
-    if (newUser.ok) {
+    if (response.ok) {
         document.location.replace("/");
     }
 };
