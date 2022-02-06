@@ -49,7 +49,7 @@ User.init(
             async beforeCreate(newUserData) {
                 newUserData.password = await bcrypt.hash(
                     newUserData.password,
-                    10
+                    8
                 );
                 return newUserData;
             },

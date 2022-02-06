@@ -11,18 +11,20 @@ router.get("/:id", async (req, res) => {
 });
 
 // Create User
-router.post("/new-user", async (req, res) => {
+router.post("/", async (req, res) => {
+    console.log(req.body);
+
     try {
-        await User.create({
-            username: req.body.username,
-            email: req.body.email,
+        const newUser = await User.create({
             first_name: req.body.firstName,
             last_name: req.body.lastName,
+            username: req.body.username,
+            email: req.body.email,
             password: req.body.password,
         });
-        res.status(200).json({ message: "You account has been created" });
+        res.status(200).json(newUser);
     } catch (err) {
-        res.status(500).json(err);
+        res.status(500).json(err.message);
     }
 });
 
