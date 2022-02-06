@@ -12,7 +12,7 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const hbs = exphbs.create({});
+const hbs = exphbs.create({ extname: "hbs" });
 
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
