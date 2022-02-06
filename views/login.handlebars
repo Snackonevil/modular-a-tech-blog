@@ -1,7 +1,35 @@
 <div class="container">
     <div class="login-card">
-        <h2>Login</h2>
 
+        <h2
+            style="font-family:'Courier New', Courier, monospace; margin-bottom: 40px"
+        >Login</h2>
+        <form>
+            <div class="mb-3">
+                <label for="emailInput" class="form-label">Email address</label>
+                <input
+                    type="email"
+                    class="form-control"
+                    id="emailInput"
+                    aria-describedby="emailHelp"
+                />
+            </div>
+            <div class="mb-3">
+                <label for="passwordInput" class="form-label">Password</label>
+                <input
+                    type="password"
+                    class="form-control"
+                    id="passwordInput"
+                />
+            </div>
+
+            <button type="submit" class="btn btn-purple">Sign In</button>
+        </form>
+    </div>
+</div>
+{{! <form action="" class="row">
+
+        </form>
         <form class="form login-form">
             <div class="form-group">
                 <label for="email-login">email:</label>
@@ -16,4 +44,4 @@
             </div>
         </form>
     </div>
-</div>
+</div> }}
