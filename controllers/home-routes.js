@@ -11,4 +11,8 @@ router.get("/login", (req, res) => {
     res.render("login");
 });
 
+router.get("/new-user", (req, res) => {
+    res.render("newUser");
+});
+
 module.exports = router;

@@ -6,7 +6,7 @@ router.get("/:id", async (req, res) => {
     res.status(200).json(user);
 });
 
-router.post("/", async (req, res) => {
+router.post("/new-user", async (req, res) => {
     await User.create({
         username: req.body.username,
     });
