@@ -23,6 +23,8 @@ router.post("/", async (req, res) => {
             email: req.body.email,
             password: req.body.password,
         });
+        req.session.loggedIn = true;
+        req.session.userData = newUser;
         res.status(200).json(newUser);
     } catch (err) {
         res.status(500).json(err);
