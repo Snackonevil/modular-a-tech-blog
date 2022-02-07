@@ -1,7 +1,8 @@
 const router = require("express").Router();
+const { User, Post, Comment } = require("../models");
 
-// let loggedIn = false;
-
+// desc: home view, redirects to login page if not loggedin
+// GET /
 router.get("/", (req, res) => {
     if (req.session.loggedIn) {
         res.render("home", {
@@ -13,6 +14,9 @@ router.get("/", (req, res) => {
         res.redirect("/login");
     }
 });
+
+// desc: dashboard view
+// GET /dashboard
 router.get("/dashboard", (req, res) => {
     if (req.session.loggedIn) {
         res.render("dashboard", {
@@ -25,10 +29,14 @@ router.get("/dashboard", (req, res) => {
     }
 });
 
+// desc: login view
+// GET /login
 router.get("/login", (req, res) => {
     res.render("login");
 });
 
+// desc: create new user view
+// GET /new-user
 router.get("/new-user", (req, res) => {
     res.render("newUser");
 });
