@@ -1,42 +1,34 @@
 const router = require("express").Router();
 const { User, Post, Comment } = require("../models");
+const withAuth = require("../utils/auth");
 
 // desc: home view, redirects to login page if not loggedin
 // GET /
-router.get("/", (req, res) => {
-    if (req.session.loggedIn) {
-        res.render("home", {
-            loggedIn: req.session.loggedIn,
-            userData: req.session.userData,
-        });
-        return;
-    } else {
-        res.redirect("/login");
-    }
+router.get("/", withAuth, (req, res) => {
+    res.render("home", {
+        loggedIn: req.session.loggedIn,
+        userData: req.session.userData,
+    });
+    return;
 });
 
 // desc: dashboard view
 // GET /dashboard
-router.get("/dashboard", async (req, res) => {
-    if (req.session.loggedIn) {
-        const posts = await Post.findAll({
-            where: {
-                user_id: req.session.userData.id,
-            },
-            attributes: {
-                exclude: ["id", "user_id"],
-            },
-        });
-        const postMap = posts.map(post => post.get({ plain: true }));
-        res.render("dashboard", {
-            loggedIn: req.session.loggedIn,
-            userData: req.session.userData,
-            postMap,
-        });
-        return;
-    } else {
-        res.redirect("/login");
-    }
+router.get("/dashboard", withAuth, async (req, res) => {
+    const posts = await Post.findAll({
+        where: {
+            user_id: req.session.userData.id,
+        },
+        attributes: {
+            exclude: ["id", "user_id"],
+        },
+    });
+    const postMap = posts.map(post => post.get({ plain: true }));
+    res.render("dashboard", {
+        loggedIn: req.session.loggedIn,
+        userData: req.session.userData,
+        postMap,
+    });
 });
 
 // desc: login view
