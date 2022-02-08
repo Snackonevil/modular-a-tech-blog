@@ -1,3 +1,12 @@
 <div class="container">
-    <h1 class="card">THIS WILL SHOW THE USER'S POSTS SO THEY CAN EDIT</h1>
+    <h1 class="card">THIS WILL SHOW THE USER'S POSTS SO THEY CAN EDIT
+    </h1>
+    <div class="card">
+
+        {{#each postMap}}
+            <h1>{{post_title}}</h1>
+            <p>{{post_body}}</p>
+            {{createdAt}}
+        {{/each}}
+    </div>
 </div>
