@@ -44,6 +44,12 @@ router.get("/dashboard", withAuth, async (req, res) => {
     });
 });
 
+// desc: create post form
+// GET /newpost
+router.get("/newpost", withAuth, (req, res) => {
+    res.render("createPost");
+});
+
 // desc: login view
 // GET /login
 router.get("/login", (req, res) => {
