@@ -51,9 +51,9 @@ router.get("/user/:id", async (req, res) => {
 // POST /api/posts
 router.post("/", async (req, res) => {
     const reqBody = {
-        post_title: req.body.postTitle,
-        post_body: req.body.postBody,
-        user_id: req.session.userData.id,
+        post_title: req.body.post_title,
+        post_body: req.body.post_body,
+        // user_id: req.session.userData.id,
     };
     const newPost = await Post.create(reqBody);
     res.status(201).json({ message: "Post created" });

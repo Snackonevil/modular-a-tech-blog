@@ -1,11 +1,14 @@
 <div class="container">
-    <h1 class="card">Hello, {{userData.first_name}}</h1>
+    <h1 class="card post">Hello, {{userData.first_name}}</h1>
+    <div class="feed">
 
-    {{#each posts as |post|}}
-        <div class="card">
-            <h2>{{post_title}}</h2>
-            <p>{{post_body}}</p>
-            <p>{{format_date createdAt}} {{format_time createdAt}}</p>
-        </div>
-    {{/each}}
+        {{#each posts as |post|}}
+            <div class="card post">
+                <h2>{{post_title}}</h2>
+                <p>by {{user.username}}</p>
+                <p>{{post_preview post_body}} ...</p>
+                <p>{{format_date createdAt}} {{format_time createdAt}}</p>
+            </div>
+        {{/each}}
+    </div>
 </div>
