@@ -1,4 +1,4 @@
-const User = require("../../models/User");
+const { User } = require("../../models");
 const router = require("express").Router();
 
 // desc: find user by Id
@@ -6,7 +6,11 @@ const router = require("express").Router();
 router.get("/:id", async (req, res) => {
     try {
         const user = await User.findByPk(req.params.id);
-        res.status(200).json(user);
+        user == null
+            ? res
+                  .status(404)
+                  .json({ message: `User with Id ${req.params.id} not found` })
+            : res.status(200).json(user);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -16,28 +20,28 @@ router.get("/:id", async (req, res) => {
 // POST api/users/
 router.post("/", async (req, res) => {
     try {
-        const newUser = await User.create({
-            first_name: req.body.firstName,
-            last_name: req.body.lastName,
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password,
-        });
+        await User.create(req.body);
         req.session.loggedIn = true;
-        req.session.userData = newUser;
-        res.status(200).json(newUser);
+        const userData = await User.findOne({
+            where: { email: req.body.email },
+            attributes: { exclude: ["id", "password"] }, //don't return pk or pass
+        });
+        res.status(200).json(userData);
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
 // desc: Login
-// POST /api/uses/login
+// POST /api/users/login
 router.post("/login", async (req, res) => {
     try {
         const dbUserData = await User.findOne({
             where: {
                 email: req.body.email,
+            },
+            atrributes: {
+                exclude: ["id", "password"],
             },
         });
 
@@ -57,7 +61,6 @@ router.post("/login", async (req, res) => {
             return;
         }
 
-        // Once the user successfully logs in, set up the sessions variable 'loggedIn'
         req.session.save(() => {
             req.session.loggedIn = true;
             req.session.userData = dbUserData;
@@ -74,7 +77,7 @@ router.post("/login", async (req, res) => {
 });
 
 // desc: Logout DESTROYYYY
-// POST /api/uses/logout
+// POST /api/users/logout
 router.post("/logout", (req, res) => {
     if (req.session.loggedIn) {
         req.session.destroy(() => {

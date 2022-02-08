@@ -6,11 +6,11 @@ const createUser = async e => {
     const email = document.getElementById("newUserEmail").value.trim();
     const password = document.getElementById("newUserPassword").value.trim();
     const reqBody = {
-        firstName,
-        lastName,
-        username,
-        email,
-        password,
+        first_name: firstName,
+        last_name: lastName,
+        username: username,
+        email: email,
+        password: password,
     };
 
     const response = await fetch("./api/users", {
