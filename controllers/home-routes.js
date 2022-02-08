@@ -63,4 +63,9 @@ router.get("/new-user", (req, res) => {
     res.render("newUser");
 });
 
+router.get("/:user", (req, res) => {
+    const user = req.params.user;
+    res.render("profile", { user });
+});
+
 module.exports = router;

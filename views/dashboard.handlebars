@@ -1,14 +1,11 @@
-<div class="container">
-    <div class="feed">
-
-        <h1 class="card post">DASHBOARD</h1>
-        {{#each posts}}
-            <div class="card post" data-post={{id}}>
-                <h1>{{post_title}}</h1>
-                <p>{{post_preview post_body}}</p>
-                <p>{{format_date createdAt}} {{format_time createdAt}}</p>
-                <button><i class="fas fa-cog"></i></button>
-            </div>
-        {{/each}}
-    </div>
+<div class="feed">
+    <h1 class="card post">DASHBOARD</h1>
+    {{#each posts}}
+        <div class="card post" data-post={{id}}>
+            <h1>{{post_title}}</h1>
+            <p>{{post_preview post_body}}</p>
+            <p>{{format_date createdAt}} {{format_time createdAt}}</p>
+            <button><i class="fas fa-cog"></i></button>
+        </div>
+    {{/each}}
 </div>
