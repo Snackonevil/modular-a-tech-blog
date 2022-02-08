@@ -3,7 +3,8 @@ const express = require("express");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
 const routes = require("./controllers");
-// helpers
+const helpers = require("./utils/helpers");
+
 require("dotenv").config();
 
 // Database Connection and store
@@ -29,7 +30,8 @@ const sess = {
 app.use(session(sess));
 
 // Establish view engine
-const hbs = exphbs.create({});
+const hbs = exphbs.create({ helpers });
+
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 

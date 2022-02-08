@@ -10,6 +10,7 @@ router.get("/", async (req, res) => {
                 { model: User, attributes: ["username"] },
                 { model: Comment, attributes: ["comment_body", "user_id"] },
             ],
+            order: [["createdAt", "DESC"]],
         });
         res.status(200).json(posts);
     } catch (err) {
@@ -52,7 +53,7 @@ router.post("/", async (req, res) => {
     const reqBody = {
         post_title: req.body.postTitle,
         post_body: req.body.postBody,
-        user_id: req.body.userId,
+        user_id: req.session.userData.id,
     };
     const newPost = await Post.create(reqBody);
     res.status(201).json({ message: "Post created" });

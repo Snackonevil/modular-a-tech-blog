@@ -4,12 +4,25 @@ const withAuth = require("../utils/auth");
 
 // desc: home view, redirects to login page if not loggedin
 // GET /
-router.get("/", withAuth, (req, res) => {
-    res.render("home", {
-        loggedIn: req.session.loggedIn,
-        userData: req.session.userData,
-    });
-    return;
+router.get("/", withAuth, async (req, res) => {
+    try {
+        const allPosts = await Post.findAll({
+            include: [
+                { model: User, attributes: ["username"] },
+                { model: Comment, attributes: ["comment_body", "user_id"] },
+            ],
+            order: [["createdAt", "DESC"]],
+        });
+        const posts = allPosts.map(post => post.get({ plain: true }));
+        res.render("home", {
+            loggedIn: req.session.loggedIn,
+            userData: req.session.userData,
+            posts,
+        });
+        return;
+    } catch (err) {
+        console.log(err);
+    }
 });
 
 // desc: dashboard view
