@@ -47,8 +47,8 @@ router.get("/dashboard", withAuth, async (req, res) => {
 
 // desc: create post form
 // GET /newpost
-router.get("/newpost", withAuth, (req, res) => {
-    res.render("createPost");
+router.get("/new-post", withAuth, (req, res) => {
+    res.render("postForm");
 });
 
 // desc: login view
@@ -63,9 +63,13 @@ router.get("/new-user", (req, res) => {
     res.render("newUser");
 });
 
+// desc: get user by username and render profile
+// GET /:user
 router.get("/:user", (req, res) => {
-    const user = req.params.user;
-    res.render("profile", { user });
+    res.render("profile", {
+        user: req.params.user,
+        loggedIn: req.session.loggedIn,
+    });
 });
 
 module.exports = router;
