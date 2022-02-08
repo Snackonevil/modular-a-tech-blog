@@ -53,7 +53,7 @@ router.post("/", async (req, res) => {
     const reqBody = {
         post_title: req.body.post_title,
         post_body: req.body.post_body,
-        // user_id: req.session.userData.id,
+        user_id: req.session.userData.id,
     };
     const newPost = await Post.create(reqBody);
     res.status(201).json({ message: "Post created" });

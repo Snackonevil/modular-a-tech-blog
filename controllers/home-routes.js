@@ -35,6 +35,7 @@ router.get("/dashboard", withAuth, async (req, res) => {
         attributes: {
             exclude: ["id", "user_id"],
         },
+        order: [["createdAt", "DESC"]],
     });
     const posts = allPosts.map(post => post.get({ plain: true }));
     res.render("dashboard", {

@@ -11,12 +11,14 @@ const createPost = async e => {
     if (postTitle == "" || postBody == "") {
         return;
     }
-    console.log(reqBody);
-    // await fetch("/api/posts", {
-    //     method: "POST",
-    //     body: reqBody,
-    //     headers: { "Content-Type": "application/json" },
-    // });
+    const response = await fetch("/api/posts", {
+        method: "POST",
+        body: JSON.stringify(reqBody),
+        headers: { "Content-Type": "application/json" },
+    });
+    if (response.ok) {
+        document.location.replace("/dashboard");
+    }
 };
 
 document.querySelector("button").addEventListener("click", createPost);
