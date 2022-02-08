@@ -19,17 +19,17 @@ const sess = {
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: {
-        maxAge: 3600,
-        httpOnly: true,
-        secure: false,
-        sameSite: "strict",
-    },
-    resave: false,
-    saveUninitialized: true,
-    store: new SequelizeStore({
-        db: sequelize,
-    }),
+    // cookie: {
+    //     maxAge: 3600,
+    //     httpOnly: true,
+    //     secure: false,
+    //     sameSite: "strict",
+    // },
+    // resave: false,
+    // saveUninitialized: true,
+    // store: new SequelizeStore({
+    //     db: sequelize,
+    // }),
 };
 app.use(session(sess));
 
