@@ -33,7 +33,7 @@ router.get("/dashboard", withAuth, async (req, res) => {
             user_id: req.session.userData.id,
         },
         attributes: {
-            exclude: ["id", "user_id"],
+            exclude: ["user_id"],
         },
         order: [["createdAt", "DESC"]],
     });
