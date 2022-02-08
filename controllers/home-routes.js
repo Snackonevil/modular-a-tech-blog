@@ -15,7 +15,7 @@ router.get("/", withAuth, (req, res) => {
 // desc: dashboard view
 // GET /dashboard
 router.get("/dashboard", withAuth, async (req, res) => {
-    const posts = await Post.findAll({
+    const allPosts = await Post.findAll({
         where: {
             user_id: req.session.userData.id,
         },
@@ -23,11 +23,11 @@ router.get("/dashboard", withAuth, async (req, res) => {
             exclude: ["id", "user_id"],
         },
     });
-    const postMap = posts.map(post => post.get({ plain: true }));
+    const posts = allPosts.map(post => post.get({ plain: true }));
     res.render("dashboard", {
         loggedIn: req.session.loggedIn,
         userData: req.session.userData,
-        postMap,
+        posts,
     });
 });
 
