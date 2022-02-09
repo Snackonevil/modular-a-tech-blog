@@ -21,11 +21,12 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
     try {
         await User.create(req.body);
-        req.session.loggedIn = true;
         const userData = await User.findOne({
             where: { email: req.body.email },
-            attributes: { exclude: ["id", "password"] }, //don't return pk or pass
+            attributes: { exclude: ["password"] }, //don't return pk or pass
         });
+        req.session.loggedIn = true;
+        req.session.userData = userData;
         res.status(200).json(userData);
     } catch (err) {
         res.status(500).json(err);
@@ -38,7 +39,7 @@ router.post("/login", async (req, res) => {
     try {
         const dbUserData = await User.findOne({
             where: { email: req.body.email },
-            atrributes: { exclude: ["id", "password"] },
+            atrributes: { exclude: ["password"] },
         });
 
         if (!dbUserData) {
