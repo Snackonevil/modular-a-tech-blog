@@ -1,26 +1,29 @@
-const { Post } = require("../models");
-const User = require("../models/User");
+const { User, Post, Comment } = require("../models");
 
 const newUser = {
     first_name: "kevin",
     last_name: "lacson",
-    username: "kevlac",
+    username: "snackonevil",
     email: "lacsonky@gmail.com",
-    password: "password",
+    password: "rararara",
 };
 
 const post = {
     post_title: "Post TWO",
     post_body: "this is the body of post one for testing purposes",
-    user_id: 3,
+    user_id: 1,
 };
 
-const seedUser = async () => {
+const comment = {
+    comment_body: "Wow this is a great post",
+    user_id: 1,
+    post_id: 1,
+};
+
+const seed = async () => {
     await User.create(newUser);
+    await Post.create(post);
+    await Comment.create(comment);
 };
 
-const seedPosts = async () => {
-    await Post.create(post);
-};
-// seedUser();
-seedPosts();
+seed();
