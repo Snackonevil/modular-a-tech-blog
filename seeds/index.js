@@ -25,7 +25,7 @@ const commentData = {
 const seed = async () => {
     await User.create(userData);
     await Post.create(postData);
-    await Comment.create(commentData);
+    await Comment.create(commentData);cd
 };
 
 seed();
