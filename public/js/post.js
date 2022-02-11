@@ -14,18 +14,19 @@ const createPost = async e => {
     };
     if (postTitle == "" || postBody == "") {
         return;
-    }
-    const response = await fetch("/api/posts", {
-        method: "POST",
-        body: JSON.stringify(reqBody),
-        headers: { "Content-Type": "application/json" },
-    });
-    if (response.ok) {
-        document.location.replace("/dashboard");
+    } else {
+        const response = await fetch("/api/posts", {
+            method: "POST",
+            body: JSON.stringify(reqBody),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (response.ok) {
+            document.location.replace("/dashboard");
+        }
     }
 };
 
-let updateBtns = document.querySelectorAll(".updateBtn");
+let editBtns = document.querySelectorAll(".editBtn");
 
 const updateRedirect = async e => {
     e.preventDefault();
@@ -33,7 +34,7 @@ const updateRedirect = async e => {
     location.href = `/update-post?post=${postId}`;
 };
 
-updateBtns.forEach(btn => btn.addEventListener("click", updateRedirect));
+editBtns.forEach(btn => btn.addEventListener("click", updateRedirect));
 
 // document.getElementById("#createPost").addEventListener("click", createPost);
 // document.querySelectorAll(".updatePost").addEventListener("click", updatePost);
