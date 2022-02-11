@@ -1,14 +1,12 @@
 const { User, Post, Comment } = require("../models");
 
-const userData = [
-    {
-        first_name: "Kevin",
-        last_name: "Lacson",
-        username: "snackonevil",
-        email: "lacsonky@gmail.com",
-        password: "rararara",
-    },
-];
+const userData = {
+    first_name: "Kevin",
+    last_name: "Lacson",
+    username: "snackonevil",
+    email: "lacsonky@gmail.com",
+    password: "rararara",
+};
 
 const postData = {
     post_title: "My First Post",
@@ -25,7 +23,7 @@ const commentData = {
 const seed = async () => {
     await User.create(userData);
     await Post.create(postData);
-    await Comment.create(commentData);cd
+    await Comment.create(commentData);
 };
 
 seed();
