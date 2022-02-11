@@ -8,8 +8,24 @@
         <label for="postBody" class="form-label">Body:</label>
         <textarea type="text" class="form-control" id="postBody"></textarea>
     </div>
-
-    <button type="submit" class="btn btn-purple">Post</button>
+    {{#if newPost}}
+        <button
+            id="createPost"
+            type="submit"
+            class="btn btn-purple"
+        >Post</button>
+    {{else}}
+        <button
+            id="updatePost"
+            type="submit"
+            class="btn btn-purple"
+        >Save</button>
+        <button
+            id="deletePost"
+            type="submit"
+            class="btn btn-danger"
+        >Delete</button>
+    {{/if}}
 </form>
 
-<script src="./js/newPost.js"></script>
+<script src="./js/post.js"></script>

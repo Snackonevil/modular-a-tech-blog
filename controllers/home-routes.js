@@ -46,9 +46,26 @@ router.get("/dashboard", withAuth, async (req, res) => {
 });
 
 // desc: create post form
-// GET /newpost
-router.get("/new-post", withAuth, (req, res) => {
-    res.render("postForm");
+// GET /post-form
+router.get("/post-form", withAuth, (req, res) => {
+    res.render("postForm", {
+        newPost: true,
+    });
+});
+
+router.get("/update-post/", withAuth, (req, res) => {
+    res.render("updateForm");
+});
+
+// desc: reroute to postForm with post id to populate form
+// GET /post-form/:id
+router.get("/post-form/:id", withAuth, async (req, res) => {
+    const post = await Post.findOne({
+        where: {
+            id: req.params.id,
+        },
+    });
+    res.json(post);
 });
 
 // desc: login view

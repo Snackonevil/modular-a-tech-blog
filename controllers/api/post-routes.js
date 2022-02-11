@@ -23,7 +23,12 @@ router.get("/", async (req, res) => {
 // GET /api/posts/:id
 router.get("/:id", async (req, res) => {
     try {
-        const post = await Post.findByPk(req.params.id);
+        console.log(req.session.userData.id);
+        const post = await Post.findByPk(req.params.id, {
+            where: {
+                user_id: req.session.userData.id,
+            },
+        });
         res.status(200).json(post);
     } catch (err) {
         console.error(err);
