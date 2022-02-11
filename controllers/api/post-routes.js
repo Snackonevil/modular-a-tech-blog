@@ -79,5 +79,14 @@ router.put("/:id", async (req, res) => {
 
 // desc: delete post
 // DELETE /api/posts/:id
+router.delete("/:id", async (req, res) => {
+    await Post.destroy({
+        where: {
+            id: req.params.id,
+            user_id: req.session.userData.id,
+        },
+    });
+    res.status(200).json({ message: "Post Deleted" });
+});
 
 module.exports = router;

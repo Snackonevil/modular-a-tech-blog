@@ -36,6 +36,5 @@ const updateRedirect = async e => {
 
 editBtns.forEach(btn => btn.addEventListener("click", updateRedirect));
 
-// document.getElementById("#createPost").addEventListener("click", createPost);
-// document.querySelectorAll(".updatePost").addEventListener("click", updatePost);
-// document.getElementById("#deletePost").addEventListener("click", deletePost);
+const createBtn = document.getElementById("createPost");
+createBtn.addEventListener("click", createPost);

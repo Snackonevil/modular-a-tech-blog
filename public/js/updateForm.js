@@ -27,7 +27,6 @@ const updatePost = async e => {
             post_title: title.value,
             post_body: body.value,
         };
-        // console.log(reqBody);
         try {
             const response = await fetch(`/api/posts/${postId}`, {
                 method: "PUT",
@@ -36,16 +35,45 @@ const updatePost = async e => {
                     "Content-Type": "application/json",
                 },
             });
-            response.ok ? await redirectToDash() : "";
+            response.ok ? redirectToDash() : "";
         } catch (err) {
             console.log(err);
         }
     }
 };
 
-const deletePost = e => {
+const deletePost = async () => {
+    const confirmDelete = await confirm(
+        "Are you sure you want to delete this post?"
+    );
+    if (!confirmDelete) {
+        return;
+    } else {
+        try {
+            const response = await fetch(`/api/posts/${postId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            console.log(response);
+            if (response.ok) {
+                redirectToDash();
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+};
+
+const handleDelete = async e => {
     e.preventDefault();
+    await deletePost();
+    // await redirectToDash();
 };
 
 const updateBtn = document.getElementById("updateBtn");
 updateBtn.addEventListener("click", updatePost);
+
+const deleteBtn = document.getElementById("deleteBtn");
+deleteBtn.addEventListener("click", handleDelete);
