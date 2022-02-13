@@ -11,7 +11,7 @@ GitHub: [Snackonevil](https://github.com/Snackonevil)
 
 A place to talk about tech. Built with Express.js, Node.js, MySQL and Sequelize ORM, Handlebars View Engine
 
-[CODE](https://github.com/Snackonevil/modular-a-tech-blog)[APP](https://modular-tech-blog.herokuapp.com/)
+[CODE](https://github.com/Snackonevil/modular-a-tech-blog) | [APP](https://modular-tech-blog.herokuapp.com/)
 
 ---
 
