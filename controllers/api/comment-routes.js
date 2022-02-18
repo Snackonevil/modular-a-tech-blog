@@ -39,7 +39,7 @@ router.get("/:id", async (req, res) => {
 
 // desc: find comment by post id
 // GET /api/comments/:post
-router.get("/:post", async (req, res) => {
+router.get("/post/:post", async (req, res) => {
     try {
         const comment = Comment.findOne({
             where: {
