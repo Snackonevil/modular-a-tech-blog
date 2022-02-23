@@ -25,8 +25,11 @@ router.post("/", async (req, res) => {
             where: { email: req.body.email },
             attributes: { exclude: ["password"] }, //don't return pk or pass
         });
+        // req.session.save(() => {
         req.session.loggedIn = true;
         req.session.userData = userData;
+        // });
+
         res.status(200).json(userData);
     } catch (err) {
         res.status(500).json(err);
@@ -57,11 +60,11 @@ router.post("/login", async (req, res) => {
             });
             return;
         }
-
-        req.session.save(() => {
-            req.session.loggedIn = true;
-            req.session.userData = dbUserData;
-        });
+        // req.session.save(() => {
+        req.session.loggedIn = true;
+        req.session.userData = dbUserData;
+        //     console.log(req.session);
+        // });
 
         res.status(200).json({
             user: dbUserData,
