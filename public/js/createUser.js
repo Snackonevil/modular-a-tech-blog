@@ -13,16 +13,29 @@ const createUser = async e => {
         password: password,
     };
 
-    const response = await fetch("./api/users", {
-        method: "POST",
-        body: JSON.stringify(reqBody),
-        headers: { "Content-Type": "application/json" },
-    });
-    if (response.ok) {
-        document.location.replace("/");
+    if (password.length < 8) {
+        const passAlert = document.querySelector(".password-alert");
+        passAlert.innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        Password must be at least 8 characters
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+        ></button>
+    </div>`;
+        return;
+    } else {
+        const response = await fetch("./api/users", {
+            method: "POST",
+            body: JSON.stringify(reqBody),
+            headers: { "Content-Type": "application/json" },
+        });
+        if (response.ok) {
+            location.replace("/");
+        }
     }
 };
 
 const signupForm = document.querySelector(".signup-form");
-
 signupForm.addEventListener("submit", createUser);
