@@ -30,10 +30,15 @@ const sess = {
 app.use(session(sess));
 
 // Establish view engine
-const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create({
+    helpers,
+    // layoutsDir: __dirname + "/views/layouts",
+    //new configuration parameter
+    extname: ".hbs",
+});
 
-app.engine("handlebars", hbs.engine);
-app.set("view engine", "handlebars");
+app.engine("hbs", hbs.engine);
+app.set("view engine", "hbs");
 
 // Init Middleware
 app.use(express.json());
