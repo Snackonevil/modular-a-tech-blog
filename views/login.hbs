@@ -3,7 +3,9 @@
             style="font-family:'Courier New', Courier, monospace;"
         >Login</h2>
         <form class="login-form">
-{{> _messages}}
+            {{#if messages}}
+                {{> _messages}}
+            {{/if}}
             <div class="mb-3">
                 <label for="emailInput" class="form-label">Email address</label>
                 <input

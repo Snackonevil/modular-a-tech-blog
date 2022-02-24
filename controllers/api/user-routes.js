@@ -46,9 +46,7 @@ router.post("/login", async (req, res) => {
         });
 
         if (!dbUserData) {
-            res.status(400).json({
-                message: "Account not found",
-            });
+            res.render("login", { messages: ["Account not found"] });
             return;
         }
 
