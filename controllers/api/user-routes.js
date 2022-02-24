@@ -40,37 +40,45 @@ router.post("/", async (req, res) => {
 // POST /api/users/login
 router.post("/login", async (req, res) => {
     try {
+        const { email, password } = req.body;
+        let messages = [];
         const dbUserData = await User.findOne({
-            where: { email: req.body.email },
+            where: { email: email },
             atrributes: { exclude: ["password"] },
         });
-
+        // If Empty fields, then push message to array
+        if (email == "" || password == "") {
+            messages.push("Empty fields");
+        }
+        // If user is not found, then push message to array
         if (!dbUserData) {
-            res.render("login", { messages: ["Account not found"] });
-            return;
+            messages.push("Account not found");
         }
 
-        const validPassword = await dbUserData.checkPassword(req.body.password);
+        // Validate password if there is a user, push message if not
+        if (dbUserData) {
+            const validPassword = await dbUserData.checkPassword(password);
+            if (!validPassword) {
+                messages.push("Incorrect password");
+            }
+        }
 
-        if (!validPassword) {
-            res.status(400).json({
-                message: "Account not found",
+        if (messages.length === 0) {
+            // req.session.save(() => {
+            req.session.loggedIn = true;
+            req.session.userData = dbUserData;
+            // console.log(req.session);
+            // });
+            res.status(200).json({
+                user: dbUserData,
+                message: "You are now logged in!",
             });
-            return;
+        } else {
+            res.send(JSON.stringify(messages));
         }
-        // req.session.save(() => {
-        req.session.loggedIn = true;
-        req.session.userData = dbUserData;
-        //     console.log(req.session);
-        // });
-
-        res.status(200).json({
-            user: dbUserData,
-            message: "You are now logged in!",
-        });
     } catch (err) {
         console.log(err);
-        res.status(500).json(err);
+        res.status(500);
     }
 });
 
