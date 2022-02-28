@@ -8,7 +8,11 @@ router.get("/", async (req, res) => {
         const posts = await Post.findAll({
             include: [
                 { model: User, attributes: ["username"] },
-                { model: Comment, attributes: ["comment_body", "user_id"] },
+                {
+                    model: Comment,
+                    attributes: ["comment_body", "user_id"],
+                    include: [{ model: User, attributes: ["username"] }],
+                },
             ],
             order: [["createdAt", "DESC"]],
         });
@@ -74,7 +78,10 @@ router.put("/:id", async (req, res) => {
             },
         });
         res.status(200).json(req.body);
-    } catch (err) {}
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
 });
 
 // desc: delete post

@@ -9,6 +9,10 @@
                 </div>
                 <p>{{post_preview post_body}} ...</p>
                 <p>by <a href=/{{user.username}}>{{user.username}}</p></a>
+                <p>Comments: {{post.comments.length}}</p>
+                {{#each post.comments as |comment|}}
+                <p>{{comment.comment_body}}</p>
+                {{/each}}
             </div>
         {{/each}}
     </div>

@@ -41,7 +41,7 @@ router.get("/:id", async (req, res) => {
 // GET /api/comments/:post
 router.get("/post/:post", async (req, res) => {
     try {
-        const comment = Comment.findOne({
+        const comments = await Comment.findAll({
             where: {
                 post_id: req.params.post,
             },
@@ -49,6 +49,8 @@ router.get("/post/:post", async (req, res) => {
                 include: ["id", "comment_body"],
             },
         });
+        console.log(comments);
+        res.status(200).json(comments);
     } catch (err) {
         console.log(err);
         res.status(500).json({ message: "Server error" });
